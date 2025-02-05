@@ -92,18 +92,18 @@
                                     {{ $sale->created_at->format('d/m/Y H:i') }}
                                 </td>
                                 <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                    {{ number_format($sale->total, 2) }} €
+                                    {{ number_format($sale->total_amount, 2) }} €
                                 </td>
                                 <td class="px-3 py-4 text-sm whitespace-nowrap">
-                                    @switch($sale->status)
-                                        @case('completed')
-                                            <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-green-800 bg-green-100 rounded-full">Complétée</span>
+                                    @switch($sale->payment_method)
+                                        @case('cash')
+                                            <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-green-800 bg-green-100 rounded-full">CASH</span>
                                             @break
-                                        @case('pending')
-                                            <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full">En attente</span>
+                                        @case('card')
+                                            <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-full">CREDIT CARD</span>
                                             @break
-                                        @case('cancelled')
-                                            <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-red-800 bg-red-100 rounded-full">Annulée</span>
+                                        @case('transfer')
+                                            <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-red-800 bg-red-100 rounded-full">TRANSFERT</span>
                                             @break
                                         @default
                                             <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-medium text-gray-800 bg-gray-100 rounded-full">{{ $sale->status }}</span>

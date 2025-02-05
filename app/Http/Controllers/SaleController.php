@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SaleController extends Controller
 {
@@ -44,11 +45,11 @@ class SaleController extends Controller
             ->where('stock_quantity', '>', 0)
             ->orderBy('name')
             ->get();
-            
+
         return view('sales.create', compact('products'));
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'items' => 'required|array|min:1',
@@ -103,24 +104,47 @@ class SaleController extends Controller
 
             DB::commit();
 
-            return response()->json([
-                'message' => 'Sale completed successfully',
-                'sale' => $sale->load('items.product'),
-            ], 201);
-
+            return redirect()->route('sales.index')->with('success', 'Sale completed successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'message' => 'Error processing sale',
-                'error' => $e->getMessage()
-            ], 422);
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
+
         }
+    }
+
+    private function calculateTotals(Sale $sale): void
+    {
+        $subtotal = 0;
+
+        // Calcul du total pour chaque ligne
+        foreach ($sale->items as $item) {
+            $item->line_total = $item->quantity * $item->unit_price;
+            $subtotal += $item->line_total;
+        }
+
+        // Calcul de la TVA (20% du sous-total)
+        $tax = $subtotal * 0.20;
+
+        // Total avec TVA
+        $total = $subtotal + $tax;
+
+        // Ajout des calculs à l'objet sale
+        $sale->subtotal = $subtotal;
+        $sale->tax = $tax;
+        $sale->total_amount = $total;
     }
 
     public function show(Sale $sale): View
     {
-        $sale->load(['items.product', 'user']);
+        $this->calculateTotals($sale);
         return view('sales.show', compact('sale'));
+    }
+
+    public function downloadPdf(Sale $sale)
+    {
+        $this->calculateTotals($sale);
+        $pdf = PDF::loadView('sales.pdf', compact('sale'));
+        return $pdf->download('facture-' . $sale->invoice_number . '.pdf');
     }
 
     public function generateInvoice(Sale $sale): JsonResponse
@@ -166,5 +190,76 @@ class SaleController extends Controller
             });
 
         return response()->json($report);
+    }
+
+    public function edit(Sale $sale)
+    {
+        $products = Product::where('stock_quantity', '>', 0)
+            ->orderBy('name')
+            ->get();
+        return view('sales.edit', compact('sale', 'products'));
+    }
+
+    public function update(Request $request, Sale $sale)
+    {
+        $validated = $request->validate([
+            'items' => 'required|array|min:1',
+            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.quantity' => 'required|integer|min:1',
+            'payment_method' => 'required|in:cash,card,transfer'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            // Mettre à jour le mode de paiement
+            $sale->payment_method = $request->payment_method;
+            $sale->save();
+
+            // Supprimer les anciens items
+            foreach ($sale->items as $item) {
+                // Remettre en stock les quantités des anciens items
+                $item->product->increment('stock_quantity', $item->quantity);
+                $item->delete();
+            }
+
+            $total = 0;
+            // Créer les nouveaux items
+            foreach ($validated['items'] as $itemData) {
+                $product = Product::findOrFail($itemData['product_id']);
+
+                // Vérifier le stock
+                if ($product->stock_quantity < $itemData['quantity']) {
+                    throw new \Exception("Stock insuffisant pour {$product->name}");
+                }
+
+                // Créer le nouvel item
+                $lineTotal = $itemData['quantity'] * $product->price;
+                $saleItem = $sale->items()->create([
+                    'product_id' => $product->id,
+                    'quantity' => $itemData['quantity'],
+                    'unit_price' => $product->price,
+                    'subtotal' => $lineTotal
+                ]);
+
+                // Calculer le total de la ligne
+                $total += $lineTotal;
+
+                // Mettre à jour le stock
+                $product->decrement('stock_quantity', $itemData['quantity']);
+            }
+
+            // Mettre à jour les totaux de la vente
+            $tax = $total * 0.20; // 20% TVA
+            $sale->total_amount = $total + $tax;
+            $sale->save();
+
+            DB::commit();
+
+            return redirect()->route('sales.show', $sale)->with('success', 'Vente mise à jour avec succès');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
+        }
     }
 }

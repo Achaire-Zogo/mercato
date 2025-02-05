@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
         ->name('sales.invoice');
     Route::post('sales/{sale}/void', [SaleController::class, 'void'])
         ->name('sales.void');
+    Route::get('sales/{sale}/pdf', [SaleController::class, 'downloadPdf'])->name('sales.download-pdf');
 
     // Profile Management
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
