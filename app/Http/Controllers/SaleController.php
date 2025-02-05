@@ -16,13 +16,35 @@ class SaleController extends Controller
 {
     public function index(): View
     {
+        // Récupérer les ventes avec leurs relations
         $sales = Sale::with(['items.product', 'user'])->latest()->get();
-        return view('sales.index', compact('sales'));
+
+        // Statistiques du jour
+        $today = now()->startOfDay();
+        $todaySales = Sale::whereDate('created_at', $today)->count();
+        $todayRevenue = Sale::whereDate('created_at', $today)->sum('total_amount');
+
+        // Statistiques du mois
+        $startOfMonth = now()->startOfMonth();
+        $monthSales = Sale::whereMonth('created_at', now()->month)->count();
+        $monthRevenue = Sale::whereMonth('created_at', now()->month)->sum('total_amount');
+
+        return view('sales.index', compact(
+            'sales',
+            'todaySales',
+            'todayRevenue',
+            'monthSales',
+            'monthRevenue'
+        ));
     }
 
     public function create(): View
     {
-        $products = Product::where('stock_quantity', '>', 0)->get();
+        $products = Product::select('id', 'name', 'price', 'stock_quantity')
+            ->where('stock_quantity', '>', 0)
+            ->orderBy('name')
+            ->get();
+            
         return view('sales.create', compact('products'));
     }
 
