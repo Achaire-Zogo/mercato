@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sale;
 use App\Models\Product;
 use App\Models\SaleItem;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -21,7 +22,8 @@ class SaleController extends Controller
 
     public function create(): View
     {
-        return view('sales.create');
+        $products = Product::where('stock_quantity', '>', 0)->get();
+        return view('sales.create', compact('products'));
     }
 
     public function store(Request $request): JsonResponse
@@ -51,7 +53,7 @@ class SaleController extends Controller
             }
 
             $sale = Sale::create([
-                'user_id' => auth()->id(),
+                'user_id' => Auth::user()->id,
                 'total_amount' => $total_amount,
                 'amount_paid' => $validated['amount_paid'],
                 'change_amount' => $validated['amount_paid'] - $total_amount,
@@ -61,7 +63,7 @@ class SaleController extends Controller
 
             foreach ($validated['items'] as $item) {
                 $product = Product::findOrFail($item['product_id']);
-                
+
                 SaleItem::create([
                     'sale_id' => $sale->id,
                     'product_id' => $product->id,

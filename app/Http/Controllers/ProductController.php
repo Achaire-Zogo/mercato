@@ -63,8 +63,13 @@ class ProductController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $validated['image_path'] = $request->file('image')->store('products', 'public');
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = 'image_' . time() . '.' . $extension;
+            $file->move(public_path('products_mercato'), $filename);
+            $validated['image_path'] = $filename;
         }
+
 
         Product::create($validated);
 
@@ -97,12 +102,21 @@ class ProductController extends Controller
             'expiration_date' => 'nullable|date',
         ]);
 
+
+
         if ($request->hasFile('image')) {
             // Delete old image if exists
             if ($product->image_path) {
-                Storage::disk('public')->delete($product->image_path);
+                $path = public_path('products_mercato/' . $product->image_path);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
             }
-            $validated['image_path'] = $request->file('image')->store('products', 'public');
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = 'image_' . time() . '.' . $extension;
+            $file->move(public_path('products_mercato'), $filename);
+            $validated['image_path'] = $filename;
         }
 
         $product->update($validated);
@@ -114,9 +128,15 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        if ($product->image_path) {
-            Storage::disk('public')->delete($product->image_path);
-        }
+
+            if ($product->image_path) {
+                $path = public_path('products_mercato/' . $product->image_path);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+        
+
 
         $product->delete();
 
