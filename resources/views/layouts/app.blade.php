@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'Mercato POS') }}</title>
+    <title>{{ config('app.name', 'Mercato') }}</title>
 
     <!-- Scripts -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}" defer></script>
 
     <!-- Custom Styles -->
     <style>

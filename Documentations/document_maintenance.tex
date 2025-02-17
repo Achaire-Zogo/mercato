@@ -1,0 +1,428 @@
+\documentclass[14pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+
+% Configuration de la géométrie de la page
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Mercato}
+\lhead{Document de Maintenance}
+\rfoot{Page \thepage}
+
+% Définition des couleurs pour le code
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Configuration des listings pour le code
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        {\large REPUBLIQUE DU CAMEROUN \hfill REPUBLIC OF CAMEROON}\\
+        {\small Paix-Travail-Patrie \hfill Peace-Work-Fatherland}\\[0.5cm]
+        {\large UNIVERSITE DE YAOUNDE 1 \hfill UNIVERSITY OF YAOUNDE 1}\\
+        {\large FACULTE DES SCIENCES \hfill FACULTY OF SCIENCE}\\
+        {\large Département d'Informatique \hfill Department of computer science}\\
+        {\small B.P.812 Yaoundé \hfill PO.BOX 812 Yaoundé}\\
+        {\small Tél /Fax : (+237) 22 23 44 96 \hfill Tel /Fax : (+237) 22 23 44 96}\\[2cm]
+
+        \begin{center}
+            {\large \textbf{Filière} : Informatique \hspace{2cm} \textbf{Niveau} : M1}\\
+            {\large \textbf{Unité d'enseignement (UE)} : INF 4027 : Génie Logiciel}\\[2cm]
+
+            \framebox{
+                \begin{minipage}{0.8\textwidth}
+                    \begin{center}
+                        \huge \textbf{MERCATO}\\[0.5cm]
+                        \Large Document de Maintenance
+                    \end{center}
+                \end{minipage}
+            }\\[2cm]
+
+            \textbf{Rédigé par} :\\[0.5cm]
+            \begin{tabular}{|l|l|}
+                \hline
+                \textbf{Noms \& Prénoms} & \textbf{Matricule} \\
+                \hline
+                MAHAMAT SALEH MAHAMAT & 21T2423 \\
+                \hline
+                SOKOUDJOU CHENDOU CHRISTIAN MANUEL & 21T2396 \\
+                \hline
+                ZOGO ABOUMA ZOZIME ACHAIRE & 18N2824 \\
+                \hline
+                FEUJO TSAGMO SIMPLICE JORDA & 18T2897 \\
+                \hline
+            \end{tabular}\\[2cm]
+
+            \textbf{Supervisé par} :\\
+            Pr. Roger ATSA ETOUNDI\\[1cm]
+
+            \textbf{Année universitaire} : 2024 - 2025
+        \end{center}
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\chapter{Système de Paiement}
+
+\section{Surveillance des Transactions}
+\subsection{Monitoring en Temps Réel}
+Le système de monitoring en temps réel est basé sur les composants suivants :
+\begin{itemize}
+    \item Dashboard de surveillance des transactions
+    \item Système de métriques avec Prometheus
+    \item Visualisation Grafana pour les KPIs
+    \item Seuils d'alerte configurés :
+        \begin{itemize}
+            \item Taux d'erreur > 5\%
+            \item Temps de réponse > 2s
+            \item Volume de transactions anormal
+        \end{itemize}
+\end{itemize}
+
+\subsection{Système d'Alertes}
+Configuration des alertes via :
+\begin{itemize}
+    \item Intégration Slack pour les notifications immédiates
+    \item Emails pour les rapports détaillés
+    \item SMS pour les incidents critiques
+\end{itemize}
+
+\subsection{Gestion des Logs}
+Procédures de gestion des logs :
+\begin{itemize}
+    \item Rotation quotidienne des logs
+    \item Rétention de 90 jours
+    \item Agrégation via ELK Stack
+    \item Analyse automatisée des patterns d'erreur
+\end{itemize}
+
+\section{Maintenance des Intégrations}
+\subsection{Système de Carte Bancaire}
+\subsubsection{Certification SSL}
+\begin{itemize}
+    \item Vérification mensuelle des dates d'expiration
+    \item Procédure de renouvellement :
+        \begin{enumerate}
+            \item Génération de la CSR
+            \item Validation par l'autorité de certification
+            \item Installation et test du nouveau certificat
+            \item Période de chevauchement de 7 jours
+        \end{enumerate}
+\end{itemize}
+
+\subsubsection{Tests de Transaction}
+Programme de tests automatisés :
+\begin{itemize}
+    \item Tests quotidiens des transactions de base
+    \item Tests hebdomadaires des cas limites
+    \item Simulation mensuelle de charge importante
+\end{itemize}
+
+\subsection{Mobile Money}
+\subsubsection{MTN Money}
+Maintenance spécifique :
+\begin{itemize}
+    \item Surveillance du taux de succès des transactions
+    \item Gestion des tokens d'authentification
+    \item Monitoring des limites de transaction
+\end{itemize}
+
+\subsubsection{Orange Money}
+Points de contrôle :
+\begin{itemize}
+    \item Vérification des webhooks
+    \item Gestion des timeouts (configuré à 30s)
+    \item Surveillance des soldes des comptes marchands
+\end{itemize}
+
+\chapter{Maintenance de la Base de Données}
+
+\section{Optimisation}
+\subsection{Nettoyage des Données}
+Procédures automatisées :
+\begin{itemize}
+    \item Archivage des transactions > 1 an
+    \item Suppression des sessions expirées
+    \item Compression des logs anciens
+\end{itemize}
+
+\subsection{Performance}
+Optimisations régulières :
+\begin{itemize}
+    \item VACUUM ANALYZE hebdomadaire
+    \item Mise à jour des statistiques
+    \item Révision des index
+    \item Monitoring des requêtes lentes
+\end{itemize}
+
+\section{Stratégie de Sauvegarde}
+\subsection{Backup Incrémental}
+Configuration :
+\begin{itemize}
+    \item Fréquence : toutes les 6 heures
+    \item Rétention : 7 jours
+    \item Compression : niveau 6
+    \item Vérification automatique de l'intégrité
+\end{itemize}
+
+\subsection{Backup Complet}
+Procédure hebdomadaire :
+\begin{itemize}
+    \item Exécution : dimanche 02:00
+    \item Rétention : 3 mois
+    \item Stockage externe chiffré
+    \item Test de restauration mensuel
+\end{itemize}
+
+\chapter{Maintenance Applicative}
+
+\section{Frontend}
+\subsection{Optimisation des Performances}
+Actions régulières :
+\begin{itemize}
+    \item Minification des assets
+    \item Compression des images
+    \item Mise en cache des ressources statiques
+    \item Lazy loading des composants
+\end{itemize}
+
+\subsection{Compatibilité}
+Tests systématiques sur :
+\begin{itemize}
+    \item Chrome, Firefox, Safari, Edge
+    \item Versions mobiles
+    \item Différentes résolutions d'écran
+\end{itemize}
+
+\section{Backend}
+\subsection{Gestion des Dépendances}
+Procédures de mise à jour :
+\begin{itemize}
+    \item Analyse hebdomadaire des vulnérabilités
+    \item Tests de régression automatisés
+    \item Documentation des changements
+\end{itemize}
+
+\subsection{Cache}
+Configuration et maintenance :
+\begin{itemize}
+    \item Redis pour le cache applicatif
+    \item Memcached pour les sessions
+    \item Politique de purge automatique
+\end{itemize}
+
+\chapter{Procédures d'Urgence}
+
+\section{Gestion des Incidents}
+\subsection{Niveaux de Criticité}
+\begin{itemize}
+    \item Niveau 1 : Impact mineur
+    \item Niveau 2 : Service dégradé
+    \item Niveau 3 : Service interrompu
+    \item Niveau 4 : Incident critique
+\end{itemize}
+
+\subsection{Procédure de Rollback}
+Étapes à suivre :
+\begin{enumerate}
+    \item Évaluation de l'impact
+    \item Sauvegarde de l'état actuel
+    \item Exécution du rollback
+    \item Vérification post-rollback
+    \item Communication aux parties prenantes
+\end{enumerate}
+
+\section{Documentation des Incidents}
+Informations à consigner :
+\begin{itemize}
+    \item Date et heure de l'incident
+    \item Nature du problème
+    \item Actions entreprises
+    \item Impact sur le service
+    \item Mesures préventives identifiées
+\end{itemize}
+
+\chapter{Coûts de Maintenance}
+
+\section{Coûts Récurrents}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|r|p{6cm}|}
+        \hline
+        \textbf{Poste} & \textbf{Coût Mensuel (XAF)} & \textbf{Description} \\
+        \hline
+        Support Technique & 100.000 & Assistance technique niveau 1 et 2 \\
+        \hline
+        Maintenance Préventive & 75.000 & Vérifications et mises à jour régulières \\
+        \hline
+        Maintenance Corrective & 50.000 & Résolution des bugs et incidents \\
+        \hline
+        Sauvegardes & 25.000 & Gestion des backups et restaurations \\
+        \hline
+        \textbf{Total} & \textbf{250.000} & \textit{Coût mensuel} \\
+        \hline
+    \end{tabular}
+    \caption{Coûts Mensuels de Maintenance}
+\end{table}
+
+\section{Coûts Exceptionnels}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|r|p{6cm}|}
+        \hline
+        \textbf{Intervention} & \textbf{Coût (XAF)} & \textbf{Fréquence} \\
+        \hline
+        Mise à jour majeure & 300.000 & Semestrielle \\
+        \hline
+        Audit sécurité & 200.000 & Annuel \\
+        \hline
+        Formation continue & 150.000 & Trimestrielle \\
+        \hline
+    \end{tabular}
+    \caption{Coûts des Interventions Exceptionnelles}
+\end{table}
+
+\chapter{Environnements}
+
+\section{Environnement de Préproduction}
+\subsection{Configuration Matérielle}
+\begin{itemize}
+    \item Serveur dédié : Dell PowerEdge T150 (ou équivalent)
+    \item Processeur : Intel Xeon E-2324G
+    \item RAM : 16 GB
+    \item Stockage : 2 x 1TB en RAID 1
+    \item Système d'exploitation : Ubuntu Server 22.04 LTS
+\end{itemize}
+
+\subsection{Configuration Logicielle}
+\begin{itemize}
+    \item Base de données : MySQL 8.0
+    \item Serveur Web : Nginx
+    \item PHP 8.1
+    \item Node.js 18 LTS
+    \item Git pour le versioning
+\end{itemize}
+
+\section{Environnement de Formation}
+\subsection{Configuration}
+\begin{itemize}
+    \item Poste de formation dédié
+    \item Base de données de test
+    \item Jeu de données de formation
+    \item Documentation utilisateur
+    \item Guides pratiques
+\end{itemize}
+
+\subsection{Ressources}
+\begin{itemize}
+    \item Salle de formation équipée
+    \item Support de formation
+    \item Exercices pratiques
+    \item Scénarios de test
+\end{itemize}
+
+\section{Mise en Production}
+\subsection{Procédure de Déploiement}
+\begin{enumerate}
+    \item \textbf{Préparation}
+        \begin{itemize}
+            \item Vérification des prérequis
+            \item Sauvegarde complète
+            \item Information des utilisateurs
+        \end{itemize}
+    \item \textbf{Installation}
+        \begin{itemize}
+            \item Déploiement des fichiers
+            \item Configuration du serveur
+            \item Migration des données
+        \end{itemize}
+    \item \textbf{Tests}
+        \begin{itemize}
+            \item Tests fonctionnels
+            \item Tests de performance
+            \item Validation utilisateur
+        \end{itemize}
+    \item \textbf{Mise en service}
+        \begin{itemize}
+            \item Activation du système
+            \item Formation des utilisateurs
+            \item Période de surveillance
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Plan de Bascule}
+\begin{itemize}
+    \item \textbf{Timing} : Week-end (48h)
+    \item \textbf{Équipe mobilisée} :
+        \begin{itemize}
+            \item 1 Chef de projet
+            \item 2 Techniciens
+            \item 1 Formateur
+        \end{itemize}
+    \item \textbf{Plan de secours} :
+        \begin{itemize}
+            \item Procédure de rollback
+            \item Restauration des sauvegardes
+            \item Support d'urgence
+        \end{itemize}
+\end{itemize}
+
+\chapter{Annexes}
+
+\section{Contacts d'Urgence}
+\begin{itemize}
+    \item Support Niveau 1 : +XXX XXX XXX
+    \item Support Niveau 2 : +XXX XXX XXX
+    \item Administrateur Système : +XXX XXX XXX
+    \item Responsable Sécurité : +XXX XXX XXX
+\end{itemize}
+
+\section{Outils de Monitoring}
+\begin{itemize}
+    \item Dashboard principal : \url{http://monitoring.mercato.local}
+    \item Logs : \url{http://logs.mercato.local}
+    \item Métriques : \url{http://metrics.mercato.local}
+\end{itemize}
+
+\end{document}

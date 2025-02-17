@@ -115,10 +115,7 @@
 ## 6. Exigences Techniques
 
 ### 6.1 Architecture
-- API RESTful
-- Microservices
-- Base de données relationnelle
-- Cache distribué
+- 2/3 Layers
 
 ### 6.2 Intégrations
 - Passerelles de paiement
@@ -145,11 +142,8 @@
 ### 8.1 Fonctionnalités Planifiées
 - Programme de fidélité
 - Marketplace
-- API partenaires
 - Applications mobiles
 
 ### 8.2 Améliorations Techniques
 - IA pour recommandations
-- Analyse prédictive
-- Blockchain pour traçabilité
 - Automatisation processus

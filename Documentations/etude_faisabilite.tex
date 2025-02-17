@@ -1,0 +1,319 @@
+\documentclass[14pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+
+% Configuration de la géométrie de la page
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Mercato}
+\lhead{Étude de Faisabilité}
+\rfoot{Page \thepage}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        {\large REPUBLIQUE DU CAMEROUN \hfill REPUBLIC OF CAMEROON}\\
+        {\small Paix-Travail-Patrie \hfill Peace-Work-Fatherland}\\[0.5cm]
+        {\large UNIVERSITE DE YAOUNDE 1 \hfill UNIVERSITY OF YAOUNDE 1}\\
+        {\large FACULTE DES SCIENCES \hfill FACULTY OF SCIENCE}\\
+        {\large Département d'Informatique \hfill Department of computer science}\\
+        {\small B.P.812 Yaoundé \hfill PO.BOX 812 Yaoundé}\\
+        {\small Tél /Fax : (+237) 22 23 44 96 \hfill Tel /Fax : (+237) 22 23 44 96}\\[2cm]
+
+        \begin{center}
+            {\large \textbf{Filière} : Informatique \hspace{2cm} \textbf{Niveau} : M1}\\
+            {\large \textbf{Unité d'enseignement (UE)} : INF 4027 : Génie Logiciel}\\[2cm]
+
+            \framebox{
+                \begin{minipage}{0.8\textwidth}
+                    \begin{center}
+                        \huge \textbf{MERCATO}\\[0.5cm]
+                        \Large Étude de Faisabilité
+                    \end{center}
+                \end{minipage}
+            }\\[2cm]
+
+            \textbf{Rédigé par} :\\[0.5cm]
+            \begin{tabular}{|l|l|}
+                \hline
+                \textbf{Noms \& Prénoms} & \textbf{Matricule} \\
+                \hline
+                MAHAMAT SALEH MAHAMAT & 21T2423 \\
+                \hline
+                SOKOUDJOU CHENDOU CHRISTIAN MANUEL & 21T2396 \\
+                \hline
+                ZOGO ABOUMA ZOZINE ACHAIRE & 18N2824 \\
+                \hline
+                FEUJO TSAGMO SIMPLICE JORDA & 18T2897 \\
+                \hline
+            \end{tabular}\\[2cm]
+
+            \textbf{Supervisé par} :\\
+            Pr. Roger ATSA ETOUNDI\\[1cm]
+
+            \textbf{Année universitaire} : 2024 - 2025
+        \end{center}
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\chapter{Analyse du Contexte}
+
+\section{Description du Projet}
+Mercato est une application de gestion de caisse destinée à un usage interne, avec les caractéristiques suivantes :
+\begin{itemize}
+    \item Utilisation exclusive par les caissières et l'administrateur
+    \item Déploiement en local sur serveur dédié
+    \item Gestion des ventes et des stocks
+    \item Reporting et suivi des transactions
+\end{itemize}
+
+\section{Utilisateurs Cibles}
+\begin{itemize}
+    \item Caissières (utilisateurs principaux)
+    \item Administrateur système
+    \item Responsable du magasin
+\end{itemize}
+
+\section{Analyse des Besoins Utilisateurs}
+
+\subsection{Besoins des Caissières}
+\begin{itemize}
+    \item \textbf{Gestion des Ventes}
+        \begin{itemize}
+            \item Interface simple et intuitive pour la saisie des ventes
+            \item Scan des codes-barres des produits
+            \item Calcul automatique du total et de la monnaie à rendre
+            \item Impression des tickets de caisse
+            \item Annulation/modification des transactions en cours
+        \end{itemize}
+    \item \textbf{Gestion des Paiements}
+        \begin{itemize}
+            \item Paiement en espèces
+            \item Suivi du fond de caisse
+            \item Clôture de caisse en fin de journée
+        \end{itemize}
+    \item \textbf{Support Opérationnel}
+        \begin{itemize}
+            \item Vérification rapide des prix
+            \item Consultation des stocks disponibles
+            \item Système d'aide contextuelle
+            \item Gestion des retours et remboursements
+        \end{itemize}
+\end{itemize}
+
+\subsection{Besoins de l'Administrateur}
+\begin{itemize}
+    \item \textbf{Gestion des Utilisateurs}
+        \begin{itemize}
+            \item Création/modification des comptes caissières
+            \item Attribution des droits d'accès
+            \item Réinitialisation des mots de passe
+        \end{itemize}
+    \item \textbf{Configuration Système}
+        \begin{itemize}
+            \item Paramétrage des caisses
+            \item Gestion des imprimantes
+            \item Configuration des backups
+            \item Maintenance du système
+        \end{itemize}
+    \item \textbf{Gestion des Produits}
+        \begin{itemize}
+            \item Ajout/modification des produits
+            \item Gestion des prix et promotions
+            \item Mise à jour des stocks
+        \end{itemize}
+\end{itemize}
+
+\subsection{Besoins du Responsable}
+\begin{itemize}
+    \item \textbf{Reporting}
+        \begin{itemize}
+            \item Rapport des ventes journalières
+            \item Suivi du chiffre d'affaires
+            \item Analyse des tendances
+            \item États des stocks
+        \end{itemize}
+    \item \textbf{Supervision}
+        \begin{itemize}
+            \item Suivi des performances des caissières
+            \item Contrôle des annulations et remboursements
+            \item Validation des opérations exceptionnelles
+        \end{itemize}
+    \item \textbf{Gestion des Stocks}
+        \begin{itemize}
+            \item Alerte de rupture de stock
+            \item Suivi des mouvements de stock
+            \item Inventaire
+        \end{itemize}
+\end{itemize}
+
+\subsection{Exigences Non Fonctionnelles}
+\begin{itemize}
+    \item \textbf{Performance}
+        \begin{itemize}
+            \item Temps de réponse < 2 secondes
+            \item Disponibilité système 99.9\%
+            \item Sauvegarde quotidienne des données
+        \end{itemize}
+    \item \textbf{Sécurité}
+        \begin{itemize}
+            \item Authentification sécurisée
+            \item Traçabilité des opérations
+            \item Protection des données sensibles
+        \end{itemize}
+    \item \textbf{Ergonomie}
+        \begin{itemize}
+            \item Interface adaptée à l'utilisation tactile
+            \item Temps de formation < 2 jours
+            \item Documentation en français
+        \end{itemize}
+\end{itemize}
+
+\chapter{Faisabilité Technique}
+
+\section{Architecture Technique}
+\subsection{Infrastructure Locale}
+\begin{itemize}
+    \item Serveur local dédié
+    \item Réseau local (LAN)
+    \item Postes clients (ordinateurs des caisses)
+    \item Système de sauvegarde local
+\end{itemize}
+
+\subsection{Stack Technologique}
+\begin{itemize}
+    \item Frontend : React.js (interface simple et intuitive)
+    \item Backend : Laravel 10 (API RESTful)
+    \item Base de données : MySQL (plus adapté pour usage local)
+    \item Serveur : Ubuntu Server LTS
+\end{itemize}
+
+\chapter{Méthodologie d'Estimation des Coûts}
+
+\section{Approche d'Estimation}
+\begin{itemize}
+    \item Méthode COCOMO II pour l'estimation du développement
+    \item Analyse comparative des salaires locaux
+    \item Consultation des fournisseurs locaux pour le matériel
+    \item Prise en compte du contexte PME
+\end{itemize}
+
+\chapter{Analyse Financière Détaillée}
+
+\section{Coûts de Développement}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|r|r|p{4cm}|}
+        \hline
+        \textbf{Poste} & \textbf{Coût Mensuel (XAF)} & \textbf{Durée} & \textbf{Justification} \\
+        \hline
+        Développeur Senior & 400.000 & 6 mois & Base sur le salaire moyen local + expérience \\
+        \hline
+        Développeur Junior & 250.000 & 6 mois & Salaire entrée de marché \\
+        \hline
+        Designer UI & 200.000 & 3 mois & Mission ponctuelle \\
+        \hline
+        \textbf{Total RH} & \multicolumn{3}{r|}{\textbf{5.100.000 XAF}} \\
+        \hline
+    \end{tabular}
+    \caption{Coûts des Ressources Humaines (Phase développement)}
+\end{table}
+
+\section{Coûts d'Infrastructure}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|r|p{6cm}|}
+        \hline
+        \textbf{Équipement} & \textbf{Coût (XAF)} & \textbf{Justification} \\
+        \hline
+        Serveur Dell PowerEdge T150 & 1.500.000 & Serveur entry-level adapté aux PME \\
+        \hline
+        Switch réseau & 150.000 & Connexion des postes clients \\
+        \hline
+        UPS & 300.000 & Protection électrique \\
+        \hline
+        Installation réseau & 200.000 & Câblage et configuration \\
+        \hline
+        \textbf{Total Infrastructure} & \textbf{2.150.000} & \textit{Investissement unique} \\
+        \hline
+    \end{tabular}
+    \caption{Coûts d'Infrastructure Initiale}
+\end{table}
+
+\section{Coûts Opérationnels Mensuels}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|r|p{6cm}|}
+        \hline
+        \textbf{Poste} & \textbf{Coût Mensuel (XAF)} & \textbf{Justification} \\
+        \hline
+        Maintenance technique & 100.000 & Support technique à temps partiel \\
+        \hline
+        Électricité (serveur) & 30.000 & Basé sur la consommation moyenne \\
+        \hline
+        Sauvegardes & 20.000 & Stockage externe mensuel \\
+        \hline
+        \textbf{Total Opérationnel} & \textbf{150.000} & \textit{Coût mensuel récurrent} \\
+        \hline
+    \end{tabular}
+    \caption{Coûts Opérationnels}
+\end{table}
+
+\section{Formation et Support}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|r|p{6cm}|}
+        \hline
+        \textbf{Activité} & \textbf{Coût (XAF)} & \textbf{Détails} \\
+        \hline
+        Formation initiale & 300.000 & Formation des caissières (5 jours) \\
+        \hline
+        Documentation & 100.000 & Manuels et guides d'utilisation \\
+        \hline
+        \textbf{Total Formation} & \textbf{400.000} & \textit{Coût unique} \\
+        \hline
+    \end{tabular}
+    \caption{Coûts de Formation}
+\end{table}
+
+\chapter{Résumé des Investissements}
+
+\section{Investissement Initial Total}
+\begin{itemize}
+    \item Développement : 5.100.000 XAF
+    \item Infrastructure : 2.150.000 XAF
+    \item Formation : 400.000 XAF
+    \item \textbf{Total} : 7.650.000 XAF
+\end{itemize}
+
+\section{Coûts Mensuels Récurrents}
+\begin{itemize}
+    \item Maintenance et opérations : 150.000 XAF
+    \item \textbf{Total Annuel} : 1.800.000 XAF
+\end{itemize}
+
+\end{document}

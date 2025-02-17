@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable, SoftDeletes, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -45,9 +46,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Check if the user is an admin.
-     *
-     * @return bool
+     * Check if the user is an admin
      */
     public function isAdmin(): bool
     {
@@ -55,13 +54,19 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the user is an employee.
-     *
-     * @return bool
+     * Check if the user is an employee
      */
     public function isEmployee(): bool
     {
         return $this->role === 'employee';
+    }
+
+    /**
+     * Check if the user is a customer
+     */
+    public function isCustomer(): bool
+    {
+        return $this->role === 'customer';
     }
 
     /**

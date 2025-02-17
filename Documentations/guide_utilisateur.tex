@@ -1,0 +1,331 @@
+\documentclass[14pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{wrapfig}
+\usepackage{float}
+
+% Configuration de la géométrie de la page
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Mercato}
+\lhead{Guide Utilisateur}
+\rfoot{Page \thepage}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        {\large REPUBLIQUE DU CAMEROUN \hfill REPUBLIC OF CAMEROON}\\
+        {\small Paix-Travail-Patrie \hfill Peace-Work-Fatherland}\\[0.5cm]
+        {\large UNIVERSITE DE YAOUNDE 1 \hfill UNIVERSITY OF YAOUNDE 1}\\
+        {\large FACULTE DES SCIENCES \hfill FACULTY OF SCIENCE}\\
+        {\large Département d'Informatique \hfill Department of computer science}\\
+        {\small B.P.812 Yaoundé \hfill PO.BOX 812 Yaoundé}\\
+        {\small Tél /Fax : (+237) 22 23 44 96 \hfill Tel /Fax : (+237) 22 23 44 96}\\[2cm]
+
+        \begin{center}
+            {\large \textbf{Filière} : Informatique \hspace{2cm} \textbf{Niveau} : M1}\\
+            {\large \textbf{Unité d'enseignement (UE)} : INF 4027 : Génie Logiciel}\\[2cm]
+
+            \framebox{
+                \begin{minipage}{0.8\textwidth}
+                    \begin{center}
+                        \huge \textbf{MERCATO}\\[0.5cm]
+                        \Large Guide Utilisateur
+                    \end{center}
+                \end{minipage}
+            }\\[2cm]
+
+            \textbf{Rédigé par} :\\[0.5cm]
+            \begin{tabular}{|l|l|}
+                \hline
+                \textbf{Noms \& Prénoms} & \textbf{Matricule} \\
+                \hline
+                MAHAMAT SALEH MAHAMAT & 21T2423 \\
+                \hline
+                SOKOUDJOU CHENDOU CHRISTIAN MANUEL & 21T2396 \\
+                \hline
+                ZOGO ABOUMA ZOZIME ACHAIRE & 18N2824 \\
+                \hline
+                FEUJO TSAGMO SIMPLICE JORDA & 18T2897 \\
+                \hline
+            \end{tabular}\\[2cm]
+
+            \textbf{Supervisé par} :\\
+            Pr. Roger ATSA ETOUNDI\\[1cm]
+
+            \textbf{Année universitaire} : 2024 - 2025
+        \end{center}
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\chapter{Introduction}
+
+\section{Présentation de l'Application}
+Mercato est une application de gestion de caisse conçue pour une utilisation locale. Elle permet aux caissières de gérer efficacement les ventes et aux administrateurs de superviser l'ensemble des opérations. L'application est déployée en local sur un serveur dédié, assurant ainsi une utilisation sécurisée et performante.
+
+\section{Public Cible}
+\begin{itemize}
+    \item \textbf{Caissières} : Utilisateurs principaux pour les opérations quotidiennes
+    \item \textbf{Administrateur} : Gestion du système et des utilisateurs
+    \item \textbf{Responsable} : Suivi des ventes et des stocks
+\end{itemize}
+
+\chapter{Connexion et Accès}
+
+\section{Première Connexion}
+\begin{enumerate}
+    \item Ouvrir le navigateur web
+    \item Accéder à l'URL locale de l'application
+    \item Entrer les identifiants fournis par l'administrateur
+    \item Changer le mot de passe à la première connexion
+\end{enumerate}
+
+[Emplacement pour capture d'écran de la page de connexion]
+\begin{figure}[H]
+    \centering
+    [Image de la page de connexion à insérer]
+    \caption{Page de connexion Mercato}
+\end{figure}
+
+\chapter{Interface Caissière}
+
+\section{Tableau de Bord}
+\begin{itemize}
+    \item Vue d'ensemble des ventes du jour
+    \item Accès rapide aux fonctions principales
+    \item Alertes de stock bas
+\end{itemize}
+
+[Emplacement pour capture d'écran du tableau de bord]
+
+\section{Gestion des Ventes}
+\subsection{Nouvelle Vente}
+\begin{enumerate}
+    \item Cliquer sur "Nouvelle Vente"
+    \item Scanner ou saisir le code produit
+    \item Ajuster la quantité si nécessaire
+    \item Vérifier le total
+    \item Valider la vente
+\end{enumerate}
+
+[Emplacement pour capture d'écran de l'interface de vente]
+
+\subsection{Modification d'une Vente}
+\begin{enumerate}
+    \item Accéder à l'historique des ventes
+    \item Sélectionner la vente à modifier
+    \item Effectuer les modifications nécessaires
+    \item Enregistrer les changements
+\end{enumerate}
+
+\subsection{Annulation de Vente}
+\begin{enumerate}
+    \item Localiser la vente dans l'historique
+    \item Cliquer sur "Annuler la vente"
+    \item Confirmer l'annulation
+    \item Saisir le motif d'annulation
+\end{enumerate}
+
+\section{Gestion de la Caisse}
+\subsection{Ouverture de Caisse}
+\begin{enumerate}
+    \item Se connecter au système
+    \item Saisir le fond de caisse initial
+    \item Valider l'ouverture
+\end{enumerate}
+
+\subsection{Clôture de Caisse}
+\begin{enumerate}
+    \item Accéder au menu "Clôture"
+    \item Compter la caisse physique
+    \item Saisir le montant
+    \item Vérifier la concordance
+    \item Valider la clôture
+\end{enumerate}
+
+[Emplacement pour capture d'écran de la clôture de caisse]
+
+\chapter{Interface Administrateur}
+
+\section{Gestion des Utilisateurs}
+\subsection{Accès à l'Interface}
+Pour créer un nouvel utilisateur dans le système, suivez ces étapes :
+\begin{enumerate}
+    \item Connectez-vous avec un compte administrateur
+    \item Accédez au menu "Utilisateurs"
+    \item Cliquez sur le bouton "Créer un Nouvel Utilisateur"
+\end{enumerate}
+
+\subsection{Formulaire de Création}
+Le formulaire de création d'utilisateur comprend les champs suivants :
+\begin{itemize}
+    \item \textbf{Nom} : Saisissez le nom complet de l'utilisateur
+    \item \textbf{Email} : Entrez une adresse email valide qui servira d'identifiant
+    \item \textbf{Mot de passe} : Créez un mot de passe sécurisé
+    \item \textbf{Confirmation du mot de passe} : Répétez le mot de passe pour confirmation
+    \item \textbf{Rôle} : Sélectionnez le rôle approprié
+    \begin{itemize}
+        \item \textit{Employé} : Accès aux fonctionnalités de base
+        \item \textit{Administrateur} : Accès complet au système
+    \end{itemize}
+\end{itemize}
+
+\subsection{Validation et Confirmation}
+\begin{enumerate}
+    \item Vérifiez que tous les champs sont correctement remplis
+    \item Cliquez sur le bouton "Créer l'utilisateur"
+    \item Un message de confirmation apparaîtra si la création est réussie
+\end{enumerate}
+
+\subsection{Notes Importantes}
+\begin{itemize}
+    \item L'email doit être unique dans le système
+    \item Le mot de passe doit respecter les critères de sécurité
+    \item Seuls les administrateurs peuvent créer de nouveaux utilisateurs
+    \item Les modifications peuvent être annulées en cliquant sur "Retour"
+\end{itemize}
+
+% Espace réservé pour les captures d'écran
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{images/creation-utilisateur.png}
+    \caption{Interface de création d'utilisateur}
+\end{figure}
+
+\subsection{Création d'un Nouvel Utilisateur}
+\begin{enumerate}
+    \item Accéder à "Gestion des Utilisateurs"
+    \item Cliquer sur "Nouvel Utilisateur"
+    \item Remplir le formulaire
+    \item Attribuer les droits
+    \item Valider la création
+\end{enumerate}
+
+[Emplacement pour capture d'écran de création d'utilisateur]
+
+\subsection{Gestion des Droits}
+\begin{itemize}
+    \item Modification des rôles
+    \item Attribution des permissions
+    \item Désactivation de compte
+\end{itemize}
+
+\section{Gestion des Produits}
+\subsection{Ajout de Produit}
+\begin{enumerate}
+    \item Accéder à "Gestion des Produits"
+    \item Cliquer sur "Nouveau Produit"
+    \item Remplir les informations :
+        \begin{itemize}
+            \item Matricule
+            \item Nom
+            \item Prix
+            \item Catégorie
+            \item Stock initial
+            \item Seuil d'alerte
+        \end{itemize}
+    \item Ajouter une image (optionnel)
+    \item Valider l'ajout
+\end{enumerate}
+
+[Emplacement pour capture d'écran d'ajout de produit]
+
+\subsection{Gestion des Stocks}
+\begin{enumerate}
+    \item Accéder à la fiche produit
+    \item Cliquer sur "Ajuster le stock"
+    \item Saisir la quantité à ajouter ou retirer
+    \item Valider l'ajustement
+\end{enumerate}
+
+\chapter{Rapports et Analyses}
+
+\section{Rapports de Vente}
+\begin{itemize}
+    \item Rapport journalier
+    \item Rapport hebdomadaire
+    \item Rapport mensuel
+    \item Filtrage par période
+\end{itemize}
+
+[Emplacement pour capture d'écran des rapports]
+
+\section{État des Stocks}
+\begin{itemize}
+    \item Vue d'ensemble des stocks
+    \item Alertes de rupture
+    \item Historique des mouvements
+\end{itemize}
+
+\chapter{Procédures Spéciales}
+
+\section{Gestion des Erreurs}
+\subsection{Erreur de Saisie}
+\begin{enumerate}
+    \item Identifier l'erreur
+    \item Informer le responsable
+    \item Effectuer la correction
+    \item Documenter l'incident
+\end{enumerate}
+
+\subsection{Problèmes Techniques}
+\begin{enumerate}
+    \item Noter le message d'erreur
+    \item Contacter le support technique
+    \item Suivre les instructions fournies
+\end{enumerate}
+
+\chapter{Bonnes Pratiques}
+
+\section{Sécurité}
+\begin{itemize}
+    \item Ne jamais partager ses identifiants
+    \item Se déconnecter après chaque utilisation
+    \item Signaler toute activité suspecte
+\end{itemize}
+
+\section{Maintenance}
+\begin{itemize}
+    \item Vérifier régulièrement les stocks
+    \item Maintenir à jour les informations produits
+    \item Sauvegarder les données importantes
+\end{itemize}
+
+\chapter{Annexes}
+
+\section{Contacts Utiles}
+\begin{itemize}
+    \item Support technique : [Numéro]
+    \item Administrateur système : [Numéro]
+    \item Responsable : [Numéro]
+\end{itemize}
+
+\section{Glossaire}
+\begin{description}
+    \item[Stock] Quantité disponible d'un produit
+    \item[Seuil d'alerte] Niveau minimum de stock avant notification
+    \item[Fond de caisse] Montant initial dans la caisse
+    \item[Clôture] Fermeture quotidienne de la caisse
+\end{description}
+
+\end{document}
